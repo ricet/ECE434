@@ -14,7 +14,7 @@ def main(stdscr):
     height = int(sys.argv[2])
     drawboard(stdscr, width, height)
 
-    cursorx = 1
+    cursorx = 2
     cursory = 1
     while True:
         c = stdscr.getch()
@@ -28,9 +28,9 @@ def main(stdscr):
             cursorx = cursorx + 2
         if c == 27:
             break
-        if cursorx < 1: cursorx = 1
+        if cursorx < 2: cursorx = 2
         if cursory < 1: cursory = 1
-        if cursorx > width*2: cursorx = width*2
+        if cursorx >= width*2: cursorx = width*2
         if cursory > height: cursory = height
         stdscr.move(cursory, cursorx)
         stdscr.addch(chr(88))
@@ -48,4 +48,5 @@ def drawboard(stdscr, width, height):
         stdscr.addch(j, 0, "*")
         stdscr.addch(j, width*2+2, "*")
 
+    stdscr.addstr(height+3, 0, "Use the arrow keys to draw, space to clear the screen, and escape to quit")
 wrapper(main)
