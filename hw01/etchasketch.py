@@ -8,7 +8,6 @@ import sys
 def main(stdscr):
     # Clear screen
     stdscr.clear()
-    stdscr.leaveok(True)
     stdscr.nodelay(False)
     # Draw board
     width = int(sys.argv[1])
@@ -24,9 +23,9 @@ def main(stdscr):
         if c == curses.KEY_UP:
             cursory = cursory - 1
         if c == curses.KEY_LEFT:
-            cursorx = cursorx - 1
+            cursorx = cursorx - 2
         if c == curses.KEY_RIGHT:
-            cursorx = cursorx + 1
+            cursorx = cursorx + 2
         if c == 27:
             break
         if cursorx < 1: cursorx = 1
