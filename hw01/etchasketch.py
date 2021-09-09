@@ -20,5 +20,5 @@ def main(stdscr):
     stdscr.refresh()
     stdscr.getkey()
 
-print(str(sys.argv[1]))
+
 wrapper(main)
