@@ -11,12 +11,12 @@ cursory = 1
 width = 0
 height = 0
 
+#Set gpio pins
 LED1 = "P8_7"
 button_up = "P9_26"
 button_right = "P9_42"
 button_down = "P9_41"
 button_left = "P9_24"
-
 GPIO.setup(LED1, GPIO.OUT)
 GPIO.setup(button_up, GPIO.IN, GPIO.PUD_DOWN)
 GPIO.setup(button_right, GPIO.IN, GPIO.PUD_DOWN)
@@ -38,13 +38,17 @@ def main(stdscr):
     height = int(sys.argv[2])
     drawboard(stdscr, width, height)
     
+    # Callback function for gpio detect event
+    # Defined inside of main() so that it has access to stdscr
     def draw_point(button):
         global height
         global width
         global cursorx
         global cursory
+        # Light led when button is pushed for feedback
         state = GPIO.input(button)
         GPIO.output(LED1, state)
+        # Only move cursor if the button is pressed, not released
         if state == 1:
             if button == button_down:
                 cursory = cursory + 1
@@ -64,7 +68,7 @@ def main(stdscr):
             stdscr.addch(chr(88))
             stdscr.refresh()
         
-        
+    # Detect button presses
     GPIO.add_event_detect(button_up, GPIO.BOTH, callback=draw_point, bouncetime=10)
     GPIO.add_event_detect(button_down, GPIO.BOTH, callback=draw_point, bouncetime=10)
     GPIO.add_event_detect(button_left, GPIO.BOTH, callback=draw_point, bouncetime=10)
