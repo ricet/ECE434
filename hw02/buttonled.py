@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import Adafruit_BBIO.GPIO as GPIO
-import time
+
 LED1 = "P8_7"
 LED2 = "P8_9"
 LED3 = "P8_11"
