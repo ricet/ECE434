@@ -11,7 +11,7 @@ The code for this part is in buttonled.py. Run with `./buttonled.py`
 1. Min voltage: 20mV, Max voltage: 3.19V
 2. The period is between 238ms - 240ms (~4.2Hz)
 3. 240ms is over twice 100ms, so very far
-4. reasons
+4. The actual period is higher because the code to toggle the pin state takes time to run, on top of the 100ms delay in the loop.
 5. With the period argument of 0.1 it uses 20% cpu
 6. The lowest period that can be achieved is 40ms. Beyond that changing the sleep time argument has no effect.
     | Sleep Time | Period | CPU Usage |
