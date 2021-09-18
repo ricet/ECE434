@@ -24,7 +24,10 @@ The code for this part is in buttonled.py. Run with `./buttonled.py`
     | 0.0005     | 40ms   | 100%      |
 7. With a sleep time of 0.1 the period is betwen 238 and 240ms, occasionally spiking as high as 248ms.
 8. The period is much less stable, more frequently jumping around and going as high as 265ms.
-9. 
+9. I removed the lines where EV was assigned and the code that echoed nothing. The period for a sleep time of 0.1 dropped to 220ms.
+10. Changing from bash to sh dropped the period down to 214ms.
+11. The lowest period I can get with all of the previous changes is now 14ms, down from 40ms without the changes.
+
 #### Python
 
 #### C
