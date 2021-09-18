@@ -10,7 +10,7 @@ The code for this part is in buttonled.py. Run with `./buttonled.py`
 #### bash/sh
 
 1. Min voltage: 20mV
-   Max voltage: 3.19V
+	Max voltage: 3.19V
 
 #### Python
 
