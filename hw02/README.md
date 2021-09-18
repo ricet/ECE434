@@ -30,6 +30,28 @@ The code for this part is in buttonled.py. Run with `./buttonled.py`
 
 #### Python
 
+The code for this section is togglegpio.py
+1. The average period seems to be about 150us, which is 6.7kHz
+2. 100% CPU usage
+3. A table comparing all of the methods is at the end of this section.
+
 #### C
 
+1. Before modifying the function, the lowest period is about 300us. After changing it to use `lseek()` to reset the file offset to the beginning of the file instead of closing the file and reopening it every time the loop runs the lowest period is about 175us.
+2. The max cpu usage is only about 40%.
+
 #### GPIOD
+
+1. Python
+    1. Period: 18us, Frequency: 55.5kHz
+    2. CPU: 100%
+2. C
+    1. Period: 3.4us, Frequency: 294kHz
+    2. CPU: 100%
+3. Python (2 pins)
+    1. Period: 19us, Frequency: 52.5kHz
+    2. CPU: 100%
+4. C (2 pins)
+    1. Period: 3.7us, Frequency: 270kHz
+    2. CPU: 100%
+
