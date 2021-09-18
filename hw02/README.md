@@ -55,3 +55,15 @@ The code for this section is togglegpio.py
     1. Period: 3.7us, Frequency: 270kHz
     2. CPU: 100%
 
+#### Comparison Table
+
+|   GPIO TOGGLE  |  sh | Python |   C   | C (lseek) | GPIOD Python | GPIOD  C | GPIOD  2 pins Python | GPIOD 2 pins C |
+|:--------------:|:---:|:------:|:-----:|:---------:|:------------:|:--------:|:--------------------:|:--------------:|
+| Period (ms)    | 40  | 0.150  | 0.300 | 0.175     | 0.018        | 0.0034   | 0.019                | 0.0037         |
+| Frequency (Hz) | 25  | 6.7k   | 3.3k  | 5.7k      | 55.5k        | 294k     | 52.5k                | 270k           |
+| CPU Usage (%)  | 100 | 100    | 40    | 40        | 100          | 100      | 100                  | 100            |
+
+### Etch-a-sketch
+
+etchasketch_buttons.py runs the etch-a-sketch program from hw01, but the cursor is moved around with buttons instead of the arrow keys. Spacebar is still used to clear the screen and escape to quit.
+Run with `./etchasketch_buttons.py [height] [width]` where height and width are the desired size of the drawing area in characters. Ensure that your terminal window is large enough for that size area.
