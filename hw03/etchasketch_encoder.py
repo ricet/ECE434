@@ -1,4 +1,6 @@
-from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP2, GPIO
+#!/usr/bin/python3
+from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP2
+import Adafruit_BBIO.GPIO as GPIO
 import time
 import smbus
 import sys
@@ -59,6 +61,14 @@ def write_led(x, y, color):
         data = bus.read_byte_data(matrix, column) | (1 << y)
         bus.write_byte_data(matrix, column, data)
 
+def read_led(x, y):
+    led_green = bus.read_byte_data(matrix, x*2) & (1 << y)
+    led_red = bus.read_byte_data(matrix, x*2+1) & (1 << y)
+    if led_green or led_red:
+        return True
+    else:
+        return False
+        
 # Callback for button push
 def handle_button(button):
         global color
@@ -68,10 +78,13 @@ def handle_button(button):
         if state == 1:
             if button == button_red:
                 color = "RED"
+                write_led(cursorx, cursory, color)
             if button == button_green:
                 color = "GREEN"
+                write_led(cursorx, cursory, color)
             if button == button_yellow:
                 color = "YELLOW"
+                write_led(cursorx, cursory, color)
             if button == button_clear:
                 clear_matrix()
 
@@ -83,13 +96,23 @@ GPIO.add_event_detect(button_clear, GPIO.BOTH, callback=handle_button, bouncetim
 clear_matrix()
 oldx = 0
 oldy = 0
+blinktimer = time.time()
 while True:
-    cursorx += round((xencoder.position - oldx)/4)
-    cursory += round((yencoder.position - oldy)/4)
-    oldx = xencoder.position
-    oldy = yencoder.position
+    if time.time() - blinktimer >= 0.2:
+        blinktimer = time.time()
+        if read_led(cursorx, cursory):
+            clear_led(cursorx, cursory)
+        else:
+            write_led(cursorx, cursory, color)
+    
+    if (abs(yencoder.position - oldy)) >= 4:
+        write_led(cursorx, cursory, color)
+        cursory += round((yencoder.position - oldy)/4)
+        oldy = yencoder.position
+        cursory = max(0, cursory)
+        cursory = min(7, cursory)
+        write_led(cursorx, cursory, color)
+        
     cursorx = max(0, cursorx)
-    cursory = max(0, cursory)
     cursorx = min(7, cursorx)
-    cursory = min(7, cursory)
-    write_led(cursorx, cursory, color)
+    
