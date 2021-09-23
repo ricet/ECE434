@@ -40,13 +40,17 @@ bus.write_byte_data(matrix, 0xe7, 0)   # Full brightness (page 15)
 def clear_matrix():
     bus.write_i2c_block_data(matrix, 0x00, [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
 
-# Function to turn on one pixel
-def write_led(x, y, color):
+# Function to turn off one pixel
+def clear_led(x, y):
     mask = 0xFF ^ (1 << y)
     column = x * 2
     led_green = bus.read_byte_data(matrix, column) & mask
     led_red = bus.read_byte_data(matrix, column + 1) & mask
     bus.write_i2c_block_data(matrix, column, [led_green, led_red])
+
+# Function to turn on one pixel
+def write_led(x, y, color):
+    clear_led(x, y)
     if color == "GREEN" or color == "YELLOW":
         column = x * 2
         data = bus.read_byte_data(matrix, column) | (1 << y)
@@ -55,7 +59,6 @@ def write_led(x, y, color):
         column = x * 2 + 1
         data = bus.read_byte_data(matrix, column) | (1 << y)
         bus.write_byte_data(matrix, column, data)
-
 
 # Call back for button push
 def draw_point(button):
@@ -90,8 +93,11 @@ clear_matrix()
 
 cleartime = 0
 colortime = 0
+blinktime = time.time()
 
 while True:
+    
+    # Erase screen if right and left are pushed at the same time
     if GPIO.input(button_right) and GPIO.input(button_left):
         if cleartime == 0:
             cleartime = time.time()
@@ -101,6 +107,7 @@ while True:
     else:
         cleartime = 0
     
+    # Cycle to next color if up and down are pushed at the same time
     if GPIO.input(button_up) and GPIO.input(button_down):
         if colortime == 0:
             colortime = time.time()
