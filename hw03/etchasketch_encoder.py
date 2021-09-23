@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP2
+from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP2, eQEP1
 import Adafruit_BBIO.GPIO as GPIO
 import time
 import smbus
@@ -17,11 +17,11 @@ bus = smbus.SMBus(2)  # Use i2c bus 1
 matrix = 0x70         # Use address 0x70
 
 yencoder = RotaryEncoder(eQEP2)
-#xencoder = RotaryEncoder()
+xencoder = RotaryEncoder(eQEP1)
 yencoder.setAbsolute()
-#xencoder.setAbsolute()
+xencoder.setAbsolute()
 yencoder.enable()
-#xencoder.enable()
+xencoder.enable()
 
 # Button GPIO setup
 button_red = "P9_26"
@@ -113,6 +113,12 @@ while True:
         cursory = min(7, cursory)
         write_led(cursorx, cursory, color)
         
-    cursorx = max(0, cursorx)
-    cursorx = min(7, cursorx)
+    if (abs(xencoder.position - oldx)) >= 4:
+        write_led(cursorx, cursory, color)
+        cursorx -= round((xencoder.position - oldx)/4)
+        oldx = xencoder.position
+        cursorx = max(0, cursorx)
+        cursorx = min(7, cursorx)
+        write_led(cursorx, cursory, color)
+        
     
