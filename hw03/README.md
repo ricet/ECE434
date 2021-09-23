@@ -12,7 +12,7 @@ Does the same thing as readtemp.sh, but also prints the alert state read over i2
 
 ##### settemp.py
 
-Sets the Thigh and Tlow temperature limits on both TMP101s on the bus. The same limits are written to both TMP101s. Run with `sudo ./settemp.py [high] [low]` where high and low are the high and low limits in degrees C.
+Sets the Thigh and Tlow temperature limits on both TMP101s on the bus. The same limits are written to both TMP101s. Run with `sudo ./settemp.py [high] [low]` where high and low are the high and low limits in degrees C. It then will wait for the alert pin on either TMP101 to go low, signaling that Thigh has been exceeded. Once that happens, it will print the temperature of the sensor with the alert.
 
 ### Etch-a-sketch
 
