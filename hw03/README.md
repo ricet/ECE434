@@ -21,4 +21,4 @@ etchasketch using the LED matrix and buttons. Run with `sudo ./etchasketch_matri
 
 ##### etchasketch_encoder.py
 
-Same as etchasketch_matrix.py but uses two rotary encoders to control the x and y position of the cursor. Three buttons are set to change the cursor to a different color and one button clears the screen. Run with `sudo ./etchasketch_encoder.py [color]`. 
+Same as etchasketch_matrix.py but uses two rotary encoders to control the x and y position of the cursor. Three buttons are set to change the cursor to a different color and one button clears the screen. First make sure that HDMI is disabled by uncommenting the appropriate line in /boot/uEnv.txt. Then run `./pinconfig.sh` to configure the encoder pins to eQEP. Then run the etchasketch program with `sudo ./etchasketch_encoder.py [color]`. 
