@@ -67,3 +67,21 @@ The code for this section is togglegpio.py
 
 etchasketch_buttons.py runs the etch-a-sketch program from hw01, but the cursor is moved around with buttons instead of the arrow keys. Spacebar is still used to clear the screen and escape to quit.
 Run with `./etchasketch_buttons.py [height] [width]` where height and width are the desired size of the drawing area in characters. Ensure that your terminal window is large enough for that size area.
+
+
+# hw02 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  2/2 | Buttons and LEDs 
+|  7/7 | Etch-a-Sketch works
+|      | Measuring a gpio pin on an Oscilloscope 
+|  2/2 | Questions answered
+|  4/4 | Table complete
+|  2/2 | gpiod
+|      | Security - missing
+|  0/1 | ssh port
+|  0/1 | iptables 
+|  0/1 | fail2ban
+| 17/20   | **Total**
+Video missing -5 
