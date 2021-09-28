@@ -84,4 +84,3 @@ Run with `./etchasketch_buttons.py [height] [width]` where height and width are 
 |  0/1 | iptables 
 |  0/1 | fail2ban
 | 17/20   | **Total**
-Video missing -5 
