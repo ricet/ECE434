@@ -31,9 +31,9 @@ try:
     while(True):
         button1_state = struct.unpack("<L", mem0[GPIO_DATAIN:GPIO_DATAIN+4])[0] & BUTTON1
         button2_state = struct.unpack("<L", mem1[GPIO_DATAIN:GPIO_DATAIN+4])[0] & BUTTON2
-        if not button2_state:
+        if not button1_state:
             mem1[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", USR3)
-        elif button2_state:
+        elif button1_state:
             mem1[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", USR3)
             
 except KeyboardInterrupt:
