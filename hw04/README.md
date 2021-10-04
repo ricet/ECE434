@@ -1,5 +1,9 @@
 # Homework 4
 
+## Memory Map
+
+
+
 ## GPIO via mmap
 
 pymmap.py reads buttons on P9_22 and PX_XX and toggles the USR3 and USR2 LEDs, all using mmap. One button is on GPIO0 and one is on GPIO1, necessitating two mmap calls. Run with `sudo ./pymmap.py`.
@@ -14,4 +18,4 @@ kerneltemp.sh enables the kernel driver for the tmp101, reads the temperature, a
 
 ## TFT display
 
-
+![penguin][tux.png]
