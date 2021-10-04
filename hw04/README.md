@@ -18,4 +18,6 @@ kerneltemp.sh enables the kernel driver for the tmp101, reads the temperature, a
 
 ## TFT display
 
-![penguin](https://github.com/ricet/ECE434/blob/main/hw04/tux.png?raw=true)
+![Boris the beagle](tft_beagle.jpg)
+
+![Altered Image](tft_text.jpg)
