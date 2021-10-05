@@ -6,6 +6,8 @@
 
 Reads the temperature from TMP101s on i2c bus 2 at addresses 0x48 and 0x4A. Converts to Fahrenheit and echos it to the terminal. Run with `sudo ./readtemp.sh `.
 
+*I didn't need the sudo*
+
 ##### readtemp.py
 
 Does the same thing as readtemp.sh, but also prints the alert state read over i2c. Run with `sudo ./readtemp.py`.
@@ -22,3 +24,17 @@ etchasketch using the LED matrix and buttons. Run with `sudo ./etchasketch_matri
 ##### etchasketch_encoder.py
 
 Same as etchasketch_matrix.py but uses two rotary encoders to control the x and y position of the cursor. Three buttons are set to change the cursor to a different color and one button clears the screen. First make sure that HDMI is disabled by uncommenting the appropriate line in /boot/uEnv.txt. Then run `./pinconfig.sh` to configure the encoder pins to eQEP. Then run the etchasketch program with `sudo ./etchasketch_encoder.py [color]`. 
+
+# hw03 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  5/5 | TMP101 
+|  3/3 |   | setup.sh
+|  2/2 |   | Documentation 
+|  5/5 | Etch-a-Sketch
+|  3/3 |   | setup.sh (pinsetup.sh)
+|  2/2 |   | Documentation
+| 20/20 | **Total**
+
+Very nicely documented.
