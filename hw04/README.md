@@ -2,7 +2,25 @@
 
 ## Memory Map
 
-
+| Block Name  | Start Address | End Address |
+|-------------|---------------|-------------|
+| GPMC        | 0x00000000    | 0x1FFFFFFF  |
+| EMIF0 SDRAM | 0x80000000    | 0xBFFFFFFF  |
+| GPIO0       | 0x44E07000    | 0x44E07FFF  |
+| UART0       | 0x44E09000    | 0x44E09FFF  |
+| I2C0        | 0x44E0B000    | 0x44E0BFFF  |
+| UART1       | 0x48022000    | 0x48022FFF  |
+| UART2       | 0x48024000    | 0x48024FFF  |
+| I2C1        | 0x4802A000    | 0x4802AFFF  |
+| McSPI0      | 0x48030000    | 0x48030FFF  |
+| GPIO1       | 0x4804C000    | 0x4804CFFF  |
+| I2C2        | 0x4819C000    | 0x4809CFFF  |
+| McSPI1      | 0x481A1000    | 0x481A1FFF  |
+| UART3       | 0x481A6000    | 0x481A6FFF  |
+| UART4       | 0x481A8000    | 0x481A8FFF  |
+| UART5       | 0x481AA000    | 0x481AAFFF  |
+| GPIO2       | 0x481AC000    | 0x481ACFFF  |
+| GPIO3       | 0x481AE000    | 0x481AEFFF  |
 
 ## GPIO via mmap
 
