@@ -9,8 +9,8 @@ GPIO_OE = 0x134
 GPIO_SETDATAOUT = 0x194
 GPIO_CLEARDATAOUT = 0x190
 
-# Change
-OUT_PIN = 1<<24
+# P8_12
+OUT_PIN = 1<<12
 
 with open("/dev/mem", "r+b" ) as f:
     mem1 = mmap(f.fileno(), GPIO1_size, offset=GPIO1_offset)
