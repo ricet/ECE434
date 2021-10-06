@@ -27,11 +27,12 @@
 pymmap.py reads buttons on P9_22 and PX_XX and toggles the USR3 and USR2 LEDs, all using mmap. One button is on GPIO0 and one is on GPIO1, necessitating two mmap calls. Run with `sudo ./pymmap.py`.
 
 pymmaptoggle.py toggles P8_12 as fast as possible using mmap. Run with `sudo ./pymmaptoggle.py`.
+
 The toggle period using this method is about 11.9uS, which is in between GPIOD using C (3.4uS) and GPIOD using python (18uS).
 
 ## i2c via the kernel driver
 
-kerneltemp.sh enables the kernel driver for the tmp101, reads the temperature, and then prints it to the console. Run with `sudo ./kerneltemp.sh`.
+kerneltemp.sh enables the kernel driver for the tmp101 on bus 2 address 0x49, reads the temperature, and then prints it to the console. Run with `sudo ./kerneltemp.sh`.
 
 ## Control the LED matrix from the browser
 

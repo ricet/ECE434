@@ -9,6 +9,7 @@ GPIO_OE = 0x134
 GPIO_SETDATAOUT = 0x194
 GPIO_CLEARDATAOUT = 0x190
 USR3 = 1<<24
+USR2 = 1<<23
 
 # Button P9_22, 
 GPIO0_offset = 0x44e07000
@@ -35,6 +36,10 @@ try:
             mem1[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", USR3)
         elif button1_state:
             mem1[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", USR3)
+        if not button2_state:
+            mem1[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", USR2)
+        elif button2_state:
+            mem1[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", USR2)
             
 except KeyboardInterrupt:
     mem1.close()
