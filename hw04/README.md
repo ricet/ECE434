@@ -30,7 +30,7 @@ pymmaptoggle.py toggles P9_22 as fast as possible using mmap. Run with `sudo ./p
 
 ## i2c via the kernel driver
 
-kerneltemp.sh enables the kernel driver for the tmp101, reads the temperature, and then prints it to the console. 
+kerneltemp.sh enables the kernel driver for the tmp101, reads the temperature, and then prints it to the console. Run with `sudo ./kerneltemp.sh`.
 
 ## Control the LED matrix from the browser
 
@@ -39,5 +39,7 @@ etchasketch_web.py runs a flask web server that displays buttons to control the 
 ## TFT display
 
 ![Boris the beagle](tft_beagle.jpg)
+
+The below image was generated with name.sh. Run with `sudo ./name.sh`.
 
 ![Altered Image](tft_text.jpg)
