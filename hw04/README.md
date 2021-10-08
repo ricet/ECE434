@@ -26,6 +26,8 @@
 
 pymmap.py reads buttons on P9_22 and PX_XX and toggles the USR3 and USR2 LEDs, all using mmap. One button is on GPIO0 and one is on GPIO1, necessitating two mmap calls. Run with `sudo ./pymmap.py`.
 
+*PX_XX?*
+
 pymmaptoggle.py toggles P8_12 as fast as possible using mmap. Run with `sudo ./pymmaptoggle.py`.
 
 The toggle period using this method is about 11.9uS, which is in between GPIOD using C (3.4uS) and GPIOD using python (18uS).
@@ -45,3 +47,17 @@ etchasketch_web.py runs a flask web server that displays buttons to control the 
 The below image was generated with name.sh. Run with `sudo ./name.sh`.
 
 ![Altered Image](tft_text.jpg)
+
+# hw04 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  2/2 | Memory map 
+|  4/4 | mmap()
+|  4/4 | i2c via Kernel
+|  5/5 | Etch-a-Sketch via flask
+|  5/5 | LCD display
+|      | Extras
+| 20/20 | **Total**
+
+*My comments are in italics. --may*
