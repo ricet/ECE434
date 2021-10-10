@@ -27,7 +27,7 @@ static unsigned int gpioButton2 = 65;
 static unsigned int irqNumber;          ///< Used to share the IRQ number within this file
 static unsigned int numberPresses = 0;  ///< For information, store the number of button presses
 static bool	    ledOn = 0;          ///< Is the LED on or off? Used to invert its state (off by default)
-static bool         ledOn2 = 0;
+static bool     ledOn2 = 0;
 /// Function prototype for the custom IRQ handler function -- see below for the implementation
 static irq_handler_t  ebbgpio_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs);
 static irq_handler_t  ebbgpio2_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs);
