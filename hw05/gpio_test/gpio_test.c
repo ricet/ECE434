@@ -20,14 +20,17 @@ MODULE_AUTHOR("Derek Molloy");
 MODULE_DESCRIPTION("A Button/LED test driver for the BBB");
 MODULE_VERSION("0.1");
 
-static unsigned int gpioLED = 7;       ///< hard coding the LED gpio for this example to P9_23 (GPIO49)
-static unsigned int gpioButton = 49;   ///< hard coding the button gpio for this example to P9_27 (GPIO115)
+static unsigned int gpioLED = 60;
+static unsigned int gpioLED2 = 50;       ///< hard coding the LED gpio for this example to P9_23 (GPIO49)
+static unsigned int gpioButton = 47;   ///< hard coding the button gpio for this example to P9_27 (GPIO115)
+static unsigned int gpioButton2 = 65;
 static unsigned int irqNumber;          ///< Used to share the IRQ number within this file
 static unsigned int numberPresses = 0;  ///< For information, store the number of button presses
 static bool	    ledOn = 0;          ///< Is the LED on or off? Used to invert its state (off by default)
-
+static bool         ledOn2 = 0;
 /// Function prototype for the custom IRQ handler function -- see below for the implementation
 static irq_handler_t  ebbgpio_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs);
+static irq_handler_t  ebbgpio2_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs);
 
 /** @brief The LKM initialization function
  *  The static keyword restricts the visibility of the function to within this C file. The __init
@@ -40,27 +43,34 @@ static int __init ebbgpio_init(void){
    int result = 0;
    printk(KERN_INFO "GPIO_TEST: Initializing the GPIO_TEST LKM\n");
    // Is the GPIO a valid GPIO number (e.g., the BBB has 4x32 but not all available)
-   if (!gpio_is_valid(gpioLED)){
+   if (!gpio_is_valid(gpioLED) | !gpio_is_valid(gpioLED)){
       printk(KERN_INFO "GPIO_TEST: invalid LED GPIO\n");
       return -ENODEV;
    }
    // Going to set up the LED. It is a GPIO in output mode and will be on by default
    ledOn = false;
+   ledOn2 = false;
    gpio_request(gpioLED, "sysfs");          // gpioLED is hardcoded to 49, request it
+   gpio_request(gpioLED2, "sysfs");
    gpio_direction_output(gpioLED, ledOn);   // Set the gpio to be in output mode and on
+   gpio_direction_output(gpioLED2, ledOn2);
 // gpio_set_value(gpioLED, ledOn);          // Not required as set by line above (here for reference)
    gpio_export(gpioLED, false);             // Causes gpio49 to appear in /sys/class/gpio
-			                    // the bool argument prevents the direction from being changed
+   gpio_export(gpioLED2, false);            // the bool argument prevents the direction from being changed
    gpio_request(gpioButton, "sysfs");       // Set up the gpioButton
+   gpio_request(gpioButtun2, "sysfs");
    gpio_direction_input(gpioButton);        // Set the button GPIO to be an input
+   gpio_direction_input(gpioButton2);
    gpio_set_debounce(gpioButton, 100);      // Debounce the button with a delay of 200ms
+   gpio_set_debounce(gpioButton2, 100);
    gpio_export(gpioButton, false);          // Causes gpio115 to appear in /sys/class/gpio
-			                    // the bool argument prevents the direction from being changed
+   gpio_export(gpioButton2, false);         // the bool argument prevents the direction from being changed
    // Perform a quick test to see that the button is working as expected on LKM load
    printk(KERN_INFO "GPIO_TEST: The button state is currently: %d\n", gpio_get_value(gpioButton));
 
    // GPIO numbers and IRQ numbers are not the same! This function performs the mapping for us
    irqNumber = gpio_to_irq(gpioButton);
+   irqNumber2 = gpio_to_irq(gpioButton2);
    printk(KERN_INFO "GPIO_TEST: The button is mapped to IRQ: %d\n", irqNumber);
 
    // This next call requests an interrupt line
