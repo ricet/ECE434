@@ -18,6 +18,6 @@ def magnitude():
     return math.sqrt(read_z()**2 + read_x()**2 + read_y()**2)
 
 while(time.time() - start_time < 2):
-    print(str(magnitude()))
+    print(str(read_z()))
     time.sleep(0.05)
 
