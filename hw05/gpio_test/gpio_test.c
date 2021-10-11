@@ -7,6 +7,8 @@
  * is attached to GPIO 49 which is on P9_23 and the button is attached to GPIO 115 on P9_27. There
  * is no requirement for a custom overlay, as the pins are in their default mux mode states.
  * @see http://www.derekmolloy.ie/
+ * 
+ * Modified by Tiarnan Rice on 8/11/2021
 */
 
 #include <linux/init.h>
@@ -24,7 +26,8 @@ static unsigned int gpioLED = 60;
 static unsigned int gpioLED2 = 50;       ///< hard coding the LED gpio for this example to P9_23 (GPIO49)
 static unsigned int gpioButton = 47;   ///< hard coding the button gpio for this example to P9_27 (GPIO115)
 static unsigned int gpioButton2 = 65;
-static unsigned int irqNumber;          ///< Used to share the IRQ number within this file
+static unsigned int irqNumber;   ///< Used to share the IRQ number within this file
+static unsigned int irqNumber2;
 static unsigned int numberPresses = 0;  ///< For information, store the number of button presses
 static bool	    ledOn = 0;          ///< Is the LED on or off? Used to invert its state (off by default)
 static bool     ledOn2 = 0;
@@ -58,7 +61,7 @@ static int __init ebbgpio_init(void){
    gpio_export(gpioLED, false);             // Causes gpio49 to appear in /sys/class/gpio
    gpio_export(gpioLED2, false);            // the bool argument prevents the direction from being changed
    gpio_request(gpioButton, "sysfs");       // Set up the gpioButton
-   gpio_request(gpioButtun2, "sysfs");
+   gpio_request(gpioButton2, "sysfs");
    gpio_direction_input(gpioButton);        // Set the button GPIO to be an input
    gpio_direction_input(gpioButton2);
    gpio_set_debounce(gpioButton, 100);      // Debounce the button with a delay of 200ms
@@ -76,6 +79,12 @@ static int __init ebbgpio_init(void){
    // This next call requests an interrupt line
    result = request_irq(irqNumber,             // The interrupt number requested
                         (irq_handler_t) ebbgpio_irq_handler, // The pointer to the handler function below
+                        IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING,   // Interrupt on rising edge (button press, not release)
+                        "ebb_gpio_handler",    // Used in /proc/interrupts to identify the owner
+                        NULL);                 // The *dev_id for shared interrupt lines, NULL is okay
+   
+   result = request_irq(irqNumber2,             // The interrupt number requested
+                        (irq_handler_t) ebbgpio2_irq_handler, // The pointer to the handler function below
                         IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING,   // Interrupt on rising edge (button press, not release)
                         "ebb_gpio_handler",    // Used in /proc/interrupts to identify the owner
                         NULL);                 // The *dev_id for shared interrupt lines, NULL is okay
@@ -114,6 +123,14 @@ static void __exit ebbgpio_exit(void){
 static irq_handler_t ebbgpio_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOn = !gpio_get_value(gpioButton);                          // Invert the LED state on each button press
    gpio_set_value(gpioLED, ledOn);          // Set the physical LED accordingly
+   printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton));
+   numberPresses++;                         // Global counter, will be outputted when the module is unloaded
+   return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
+}
+
+static irq_handler_t ebbgpio2_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs){
+   ledOn2 = !gpio_get_value(gpioButton2);                          // Invert the LED state on each button press
+   gpio_set_value(gpioLED2, ledOn2);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton));
    numberPresses++;                         // Global counter, will be outputted when the module is unloaded
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
