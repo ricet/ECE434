@@ -10,7 +10,8 @@
 
 ## Controlling the PWM Frequency
 
-
+![pwm4](pwm4.png)
+![pwmtest](pwmtest.png)
 
 ## Reading an Input at Regular Intervals
 
