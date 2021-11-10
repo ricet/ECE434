@@ -2,19 +2,23 @@
 
 ## Blinking an LED
 
-![nopru](nopru.png)
+![nopru](pics/nopru.png)
 
 ## PWM Generator
 
-![pru](pru.png)
+![pru](pics/pru.png)
 
 ## Controlling the PWM Frequency
 
-![pwm4](pwm4.png)
-![pwmtest](pwmtest.png)
+![pwm4](pics/pwm4.png)
+![pwmtest](pics/pwmtest.png)
 
 ## Reading an Input at Regular Intervals
 
-
+![buttondelay](pics/buttondelay.png)
 
 ## Analog Wave Generator
+
+![Sawtooth](pics/sawtooth.png)
+![Triangle](pics/triangle.png)
+![Sine](pics/sine.png)
