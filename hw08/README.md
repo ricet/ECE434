@@ -41,9 +41,16 @@ input.pru0.c reads the state of an input pin and puts it on an output pin. run-i
 
 ## Analog Wave Generator
 
+Here I ran sine.pru0.c which uses PWM modulated by different shaped signals, which are then input into an RC low pass filter to recreate the original signal. My RC filter was four 100nF capacitors in series with a 10k potentiometer for tuning. The code is run with `sudo make TARGET=sine.pru0.c`, and the signal type can be changed by uncommenting the #define at the beginning of the file. For each waveform, I tuned the resistance to get rid of as much of the high frequency content as possible while still leaving a relatively sharp corner for the sawtooth and triangle waves and keeping the magnitude as high as possible for the sine wave. This is difficult to do with the RC filter because it is only a first order filter with a slow roll off. A higher order filter would be better to limit the output to just the necessary harmonics to recreate the signal accurately. 
 
 ![Sawtooth](pics/sawtooth.png)
 
+*Sawtooth*
+
 ![Triangle](pics/triangle.png)
 
+*Triangle*
+
 ![Sine](pics/sine.png)
+
+*Sine*
