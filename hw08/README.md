@@ -47,3 +47,15 @@ input.pru0.c reads the state of an input pin and puts it on an output pin. run-i
 ![Triangle](pics/triangle.png)
 
 ![Sine](pics/sine.png)
+
+# hw08 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+| 14/14 | PRU
+|  2/2 | Controlling the PWM Frequency - optional
+|  2/2 | Reading an Input at Regular Intervals - optional
+|  2/2 | Analog Wave Generator - optional
+| 15/20 | **Total**
+
+*My comments are in italics. --may*
