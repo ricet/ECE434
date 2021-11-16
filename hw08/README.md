@@ -49,8 +49,16 @@ Here I ran sine.pru0.c which uses PWM modulated by different shaped signals, whi
 
 ![Triangle](pics/triangle.png)
 
-*Triangle*
-
 ![Sine](pics/sine.png)
 
-*Sine*
+# hw08 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+| 14/14 | PRU
+|  2/2 | Controlling the PWM Frequency - optional
+|  2/2 | Reading an Input at Regular Intervals - optional
+|  2/2 | Analog Wave Generator - optional
+| 20/20 | **Total**
+
+*My comments are in italics. --may*
